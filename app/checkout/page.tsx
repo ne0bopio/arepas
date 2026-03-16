@@ -58,13 +58,14 @@ export default function CheckoutPage() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [customer, setCustomer] = useState<CustomerInfo>({ name: '', email: '', phone: '' })
+  const [orderComplete, setOrderComplete] = useState(false)
 
-  // Redirect if cart is empty
+  // Redirect if cart is empty (but not after a successful order)
   useEffect(() => {
-    if (items.length === 0) {
+    if (items.length === 0 && !orderComplete) {
       router.replace('/order')
     }
-  }, [items, router])
+  }, [items, router, orderComplete])
 
   // Create PaymentIntent on mount
   useEffect(() => {
@@ -81,67 +82,6 @@ export default function CheckoutPage() {
       })
       .catch(() => setError('Failed to connect. Please try again.'))
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    if (!clientSecret) return
-
-    // We need access to stripe & elements — this is handled inside CheckoutForm
-    // This outer handler triggers the Elements submit via a custom approach below
-  }
-
-  async function handleStripeSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    setLoading(true)
-    setError(null)
-
-    try {
-      const stripe = await stripePromise
-      if (!stripe) throw new Error('Stripe not loaded')
-
-      // Confirm payment client-side
-      const { error: stripeError, paymentIntent } = await stripe.confirmPayment({
-        elements: undefined as any, // elements accessed via hook inside CheckoutForm
-        confirmParams: {
-          return_url: `${window.location.origin}/order/confirmation`,
-        },
-        redirect: 'if_required',
-      })
-
-      if (stripeError) {
-        setError(stripeError.message ?? 'Payment failed.')
-        setLoading(false)
-        return
-      }
-
-      if (paymentIntent?.status === 'succeeded') {
-        // Confirm order server-side
-        const res = await fetch('/api/orders/confirm', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            paymentIntentId: paymentIntent.id,
-            customer,
-            items: items.map((i) => ({
-              product_id: i.product.id,
-              quantity: i.quantity,
-              unit_price_cents: i.product.price_cents,
-            })),
-            totalCents,
-          }),
-        })
-        const data = await res.json()
-        if (!res.ok) throw new Error(data.error ?? 'Order confirmation failed.')
-
-        clear()
-        router.push(`/order/confirmation?orderId=${data.orderId}`)
-      }
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Something went wrong.')
-    } finally {
-      setLoading(false)
-    }
-  }
 
   if (items.length === 0) return null
 
@@ -262,6 +202,7 @@ export default function CheckoutPage() {
                     setLoading={setLoading}
                     setError={setError}
                     onSuccess={(orderId) => {
+                      setOrderComplete(true)
                       clear()
                       router.push(`/order/confirmation?orderId=${orderId}`)
                     }}
