@@ -27,9 +27,9 @@ function ProductCard({ product }: { product: Product }) {
   return (
     <motion.div
       variants={scaleIn}
-      className="bg-white rounded-2xl overflow-hidden shadow-sm border border-black/5 flex flex-col"
+      className="bg-white rounded-3xl overflow-hidden shadow-md shadow-black/3 border border-black/5 flex flex-col hover:shadow-lg transition-shadow duration-300"
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-[#F5A623]/10">
+      <div className="relative aspect-[4/3] overflow-hidden bg-[#F5C6AA]/15">
         {isValidImageUrl(product.image_url) ? (
           <Image
             src={product.image_url}
@@ -59,7 +59,7 @@ function ProductCard({ product }: { product: Product }) {
           onClick={() => add(product)}
           className="w-full bg-[#F5A623] hover:bg-[#e09515] text-[#1A1A1A] font-semibold py-3 rounded-full transition-all duration-200 flex items-center justify-center gap-2"
         >
-          {inCart ? `Add another (${inCart.quantity} in cart)` : 'Add to order'}
+          {inCart ? `Agregar otro (${inCart.quantity} en carrito)` : 'Agregar al pedido'}
         </button>
       </div>
     </motion.div>
@@ -81,17 +81,17 @@ export default function MenuPreview() {
           className="text-center mb-16"
         >
           <motion.p variants={fadeUp} className="text-sm font-semibold tracking-widest uppercase text-[#2D6A4F] mb-3">
-            What we make
+            Lo que preparamos
           </motion.p>
           <motion.h2
             variants={fadeUp}
             className="text-4xl sm:text-5xl font-bold text-[#1A1A1A] mb-4"
             style={{ fontFamily: 'var(--font-lora)' }}
           >
-            Today&apos;s menu
+            Nuestro menú
           </motion.h2>
           <motion.p variants={fadeUp} className="text-[#1A1A1A]/60 max-w-xl mx-auto">
-            All items are made fresh the morning after you order. Pre-order by 9pm tonight.
+            Todo se hace fresco la mañana después de tu pedido. Ordena antes de las 9pm.
           </motion.p>
         </motion.div>
 
@@ -114,7 +114,7 @@ export default function MenuPreview() {
         >
           <Link href="/order">
             <Button size="lg" variant="secondary">
-              View full menu & order
+              Ver menú completo y ordenar
             </Button>
           </Link>
         </motion.div>

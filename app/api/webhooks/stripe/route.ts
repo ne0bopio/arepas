@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
       console.warn(
         `Webhook: payment ${paymentIntent.id} succeeded but no order found. Manual review needed.`
       )
-      // TODO: Send alert email to Carlos for manual follow-up
+      // TODO: Send alert email to Carol for manual follow-up
     }
   }
 

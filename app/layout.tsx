@@ -18,19 +18,19 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Arepas y más — Fresh from Carlos\'s kitchen',
+  title: 'Arepas y más — Hecha con amor, desde la cocina de Carol',
   description:
-    'Order Colombian arepas and stuffed bread rolls made fresh every morning. Pre-order by 9pm for tomorrow\'s batch.',
+    'Ordena arepas colombianas y pan relleno, hechos frescos cada mañana por Carol. Ordena antes de las 9pm para el lote de mañana.',
   openGraph: {
     title: 'Arepas y más',
-    description: 'Fresh Colombian food, made to order. Order tonight, pick up tomorrow.',
+    description: 'Comida colombiana fresca, hecha por pedido. Ordena esta noche, recoge mañana.',
     type: 'website',
   },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${lora.variable} ${inter.variable}`}>
+    <html lang="es" className={`${lora.variable} ${inter.variable}`}>
       <body className="font-sans antialiased" style={{ fontFamily: 'var(--font-inter)' }}>
         <CartProvider>
           <Navbar />

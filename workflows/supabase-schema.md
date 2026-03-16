@@ -52,7 +52,7 @@
 Bucket: `product-images` — public read, authenticated write
 
 ## Auth
-Single admin user (Carlos). Created manually in Supabase Auth dashboard.
+Single admin user (Carol). Created manually in Supabase Auth dashboard.
 
 ## SQL to run in Supabase SQL editor
 

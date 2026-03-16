@@ -22,7 +22,7 @@ function ConfirmationContent() {
       {/* Success icon */}
       <motion.div
         variants={fadeUp}
-        className="w-24 h-24 rounded-full bg-[#2D6A4F]/10 flex items-center justify-center text-5xl mx-auto mb-8"
+        className="w-24 h-24 rounded-full bg-[#F5C6AA]/20 flex items-center justify-center text-5xl mx-auto mb-8"
       >
         ✅
       </motion.div>
@@ -32,17 +32,17 @@ function ConfirmationContent() {
         className="text-4xl sm:text-5xl font-bold text-[#1A1A1A] mb-4"
         style={{ fontFamily: 'var(--font-lora)' }}
       >
-        Order confirmed!
+        ¡Pedido confirmado!
       </motion.h1>
 
       <motion.p variants={fadeUp} className="text-lg text-[#1A1A1A]/60 mb-2">
-        Your food will be fresh and ready on
+        Tu comida estará fresca y lista el
       </motion.p>
       <motion.p
         variants={fadeUp}
         className="text-xl font-bold text-[#2D6A4F] mb-8"
       >
-        {getTomorrowLabel()} — from 8am
+        {getTomorrowLabel()} — desde las 8am
       </motion.p>
 
       {orderId && (
@@ -50,7 +50,7 @@ function ConfirmationContent() {
           variants={fadeUp}
           className="bg-[#FDFAF4] rounded-xl p-4 mb-8 border border-black/5"
         >
-          <p className="text-xs text-[#1A1A1A]/40 uppercase tracking-widest mb-1">Order ID</p>
+          <p className="text-xs text-[#1A1A1A]/40 uppercase tracking-widest mb-1">ID del pedido</p>
           <p className="font-mono text-sm text-[#1A1A1A]/70 break-all">{orderId}</p>
         </motion.div>
       )}
@@ -59,28 +59,28 @@ function ConfirmationContent() {
         <div className="flex gap-3">
           <span className="text-xl">📬</span>
           <div>
-            <p className="font-semibold text-[#1A1A1A]">Check your email</p>
+            <p className="font-semibold text-[#1A1A1A]">Revisa tu email</p>
             <p className="text-sm text-[#1A1A1A]/60">
-              We&apos;ve sent a confirmation with your order details and pickup info.
+              Te enviamos una confirmación con los detalles de tu pedido y la información de recogida.
             </p>
           </div>
         </div>
         <div className="flex gap-3">
           <span className="text-xl">📍</span>
           <div>
-            <p className="font-semibold text-[#1A1A1A]">Pickup location</p>
+            <p className="font-semibold text-[#1A1A1A]">Lugar de recogida</p>
             <p className="text-sm text-[#1A1A1A]/60">
               {/* TODO: Replace with real address */}
-              123 Main St, Your City — available 8am to 11am
+              123 Main St, Your City — disponible de 8am a 11am
             </p>
           </div>
         </div>
         <div className="flex gap-3">
           <span className="text-xl">🌽</span>
           <div>
-            <p className="font-semibold text-[#1A1A1A]">Made fresh for you</p>
+            <p className="font-semibold text-[#1A1A1A]">Hecho fresco para ti</p>
             <p className="text-sm text-[#1A1A1A]/60">
-              Carlos cooks exactly what&apos;s been ordered. Your food will be fresh, never reheated.
+              Carol cocina exactamente lo que se pidió — tu comida será fresca, hecha con amor, nunca recalentada.
             </p>
           </div>
         </div>
@@ -88,10 +88,10 @@ function ConfirmationContent() {
 
       <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link href="/">
-          <Button variant="ghost">Back to home</Button>
+          <Button variant="ghost">Volver al inicio</Button>
         </Link>
         <Link href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-          <Button variant="secondary">Tell a friend 📸</Button>
+          <Button variant="secondary">Cuéntale a un amigo 📸</Button>
         </Link>
       </motion.div>
     </motion.div>
@@ -101,7 +101,7 @@ function ConfirmationContent() {
 export default function ConfirmationPage() {
   return (
     <div className="min-h-screen bg-[#FDFAF4] pt-16 flex items-center justify-center py-20">
-      <Suspense fallback={<div className="text-center text-[#1A1A1A]/40">Loading...</div>}>
+      <Suspense fallback={<div className="text-center text-[#1A1A1A]/40">Cargando...</div>}>
         <ConfirmationContent />
       </Suspense>
     </div>

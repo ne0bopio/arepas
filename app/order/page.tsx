@@ -45,9 +45,9 @@ function CutoffCountdown() {
   if (passed) {
     return (
       <div className="bg-[#C0392B]/10 border border-[#C0392B]/20 rounded-xl p-4 text-center">
-        <p className="font-semibold text-[#C0392B]">Orders are closed for today.</p>
+        <p className="font-semibold text-[#C0392B]">Los pedidos están cerrados por hoy.</p>
         <p className="text-sm text-[#1A1A1A]/60 mt-1">
-          Come back before 9pm to order for the next batch.
+          Vuelve antes de las 9pm para ordenar el próximo lote.
         </p>
       </div>
     )
@@ -55,7 +55,7 @@ function CutoffCountdown() {
 
   return (
     <div className="bg-[#F5A623]/10 border border-[#F5A623]/20 rounded-xl p-4 text-center">
-      <p className="text-sm text-[#1A1A1A]/60">Order closes in</p>
+      <p className="text-sm text-[#1A1A1A]/60">Pedidos cierran en</p>
       <p className="text-2xl font-bold text-[#1A1A1A] font-mono">{timeLeft ?? '...'}</p>
       <p className="text-sm text-[#1A1A1A]/60 mt-1">
         for <span className="font-semibold">{getTomorrowLabel()}</span>&apos;s batch
@@ -103,17 +103,17 @@ export default function OrderPage() {
         {/* Header */}
         <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="mb-10">
           <motion.p variants={fadeUp} className="text-sm font-semibold tracking-widest uppercase text-[#2D6A4F] mb-2">
-            Fresh Colombian food
+            Comida colombiana fresca
           </motion.p>
           <motion.h1
             variants={fadeUp}
             className="text-4xl sm:text-5xl font-bold text-[#1A1A1A]"
             style={{ fontFamily: 'var(--font-lora)' }}
           >
-            Build your order
+            Arma tu pedido
           </motion.h1>
           <motion.p variants={fadeUp} className="text-[#1A1A1A]/60 mt-2">
-            Order for <span className="font-semibold text-[#1A1A1A]">{getTomorrowLabel()}</span>
+            Pedido para <span className="font-semibold text-[#1A1A1A]">{getTomorrowLabel()}</span>
           </motion.p>
         </motion.div>
 
@@ -169,7 +169,7 @@ export default function OrderPage() {
                           disabled={cutoffPassed}
                           className="text-sm font-semibold text-[#2D6A4F] hover:text-[#235840] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                         >
-                          + Add to order
+                          + Agregar al pedido
                         </button>
                       )}
                     </div>
@@ -185,11 +185,11 @@ export default function OrderPage() {
 
             <div className="bg-white rounded-2xl p-6 border border-black/5 shadow-sm">
               <h2 className="font-bold text-lg text-[#1A1A1A] mb-4" style={{ fontFamily: 'var(--font-lora)' }}>
-                Your order
+                Tu pedido
               </h2>
 
               {items.length === 0 ? (
-                <p className="text-[#1A1A1A]/40 text-sm">Nothing added yet.</p>
+                <p className="text-[#1A1A1A]/40 text-sm">Aún no has agregado nada.</p>
               ) : (
                 <ul className="space-y-2 mb-4">
                   {items.map((item) => (
@@ -216,13 +216,13 @@ export default function OrderPage() {
                   size="lg"
                   disabled={totalItems === 0 || cutoffPassed}
                 >
-                  Proceed to checkout
+                  Ir a pagar
                 </Button>
               </Link>
 
               {totalItems === 0 && (
                 <p className="text-xs text-center text-[#1A1A1A]/40 mt-3">
-                  Add at least one item to continue
+                  Agrega al menos un producto para continuar
                 </p>
               )}
             </div>
@@ -234,7 +234,7 @@ export default function OrderPage() {
       {totalItems > 0 && (
         <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-black/10 p-4 flex items-center justify-between gap-4 shadow-lg">
           <div>
-            <p className="text-xs text-[#1A1A1A]/50">{totalItems} item{totalItems !== 1 ? 's' : ''}</p>
+            <p className="text-xs text-[#1A1A1A]/50">{totalItems} {totalItems !== 1 ? 'productos' : 'producto'}</p>
             <p className="font-bold text-lg text-[#1A1A1A]">{formatCents(totalCents)}</p>
           </div>
           <Link href="/checkout">
