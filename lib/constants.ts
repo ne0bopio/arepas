@@ -3,9 +3,9 @@ export const SITE_TAGLINE = 'Hecho con amor, listo mañana'
 export const CUTOFF_HOUR = 21 // 9pm
 
 export const NAV_LINKS = [
-  { label: 'Menu', href: '#menu' },
-  { label: 'How it works', href: '#how-it-works' },
-  { label: 'About', href: '#about' },
+  { label: 'Menu', href: '/#menu' },
+  { label: 'How it works', href: '/#how-it-works' },
+  { label: 'About', href: '/#about' },
 ]
 
 export const PRODUCTS = [
