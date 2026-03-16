@@ -1,55 +1,69 @@
 # Next Session Goals
-_Last updated: 2026-03-15_
+_Last updated: 2026-03-16_
 
-## Priority 1 — Test the full order flow
-- [ ] Add `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` to `.env.local` (get from Stripe dashboard → Developers → API keys)
-- [ ] Add Supabase keys to `.env.local` (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`)
-- [ ] Run the SQL in `workflows/supabase-schema.md` in the Supabase SQL Editor to create the `orders` and `order_items` tables
+## ✅ Completed
+- Rebranded Carlos → Carol throughout (copy, code, docs)
+- Full Spanish translation of entire site
+- Carol's name featured prominently in hero headline
+- Peach accent (#F5C6AA) added visibly throughout (eyebrow pill, icon circles, image tints, footer text)
+- Feminine design touch: softer corners (rounded-3xl), warmer copy voice, 👩‍🍳 emoji
+- Build verified with zero TypeScript errors
+
+---
+
+## Priority 1 — Add real assets (photos)
+- [ ] **Food photos** — Carol photographs her arepas and pan relleno with a phone (natural light works great)
+  - Short-term fallback: Unsplash/Pexels — search "arepa", "pan de bono", "Colombian food"
+  - Replace `image_url: 'test'` in `lib/constants.ts` for `pan_pollo` and `pan_carne`
+  - Recommended size: 800×600px minimum, square or 4:3 ratio
+- [ ] **Owner photo** — replace `/public/woman.jpg` placeholder with a real photo of Carol
+  - Used in `AboutCarol.tsx` — aspect ratio 4:5, so a portrait shot works best
+- [ ] Check all `next/image` usages still have correct `alt` text once real photos are in
+
+## Priority 2 — Test Stripe checkout + email confirmation
+- [ ] Add missing env vars to `.env.local`:
+  - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` — from Stripe dashboard → Developers → API keys
+  - `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`
+  - `STRIPE_WEBHOOK_SECRET` — create a webhook in Stripe → Webhooks pointing to `/api/webhooks/stripe`
+  - `RESEND_API_KEY` — also need a verified sending domain in Resend
+- [ ] Run the SQL in `workflows/supabase-schema.md` in Supabase SQL Editor to create `orders` and `order_items` tables
 - [ ] Test full checkout with Stripe test card `4242 4242 4242 4242`, any future expiry, any CVC
-- [ ] Confirm the order row appears in Supabase `orders` table after payment
-- [ ] Test email confirmation — add `RESEND_API_KEY` and verify the email arrives (need a verified sending domain in Resend)
+- [ ] Confirm order row appears in Supabase `orders` table after payment
+- [ ] Confirm email confirmation arrives with correct Spanish copy and Carol's name
+- [ ] Fix order cutoff bug (Priority 7 below) during this phase
 
-## Priority 2 — Improve the Hero section
-- [ ] Rewrite headline — make it more personal and emotional (Carol's story, not just the product)
-- [ ] Consider adding a real food photo as the hero background or a large side image
-- [ ] Review CTA copy — "Order Now" is fine but test "Order for Tomorrow" or "Pre-order Today"
-- [ ] Tighten the cutoff reminder text — shorter, more urgent
+## Priority 3 — Design iteration / layout tweaks
+- [ ] Review all sections at desktop + 375px mobile for any spacing or layout issues
+- [ ] Hero: consider adding a real food photo (background or large side image) once assets arrive
+- [ ] MenuPreview cards: review once real product photos are in — may need aspect ratio adjustments
+- [ ] General polish pass after Carol's feedback on the live site
 
-## Priority 3 — Copywriting pass (whole site)
-- [ ] All copy is placeholder-quality — do a full pass with Carol's real voice
-- [ ] About section: replace generic text with Carol's actual story
-- [ ] Product descriptions: make them more vivid and appetizing
-- [ ] Footer tagline: "Hecho con amor, listo mañana" — confirm Carol likes it
-- [ ] Replace `123 Main St, Your City` pickup address in `app/checkout/page.tsx` and `app/order/confirmation/page.tsx`
-- [ ] Replace placeholder Instagram URL in `lib/constants.ts`
+## Priority 4 — Real links (Instagram + call button)
+- [ ] **Instagram:** replace placeholder URL in `lib/constants.ts` → `INSTAGRAM_URL`
+  - Used in Navbar, Footer, and confirmation page "Cuéntale a un amigo 📸" button
+- [ ] **Call / WhatsApp button:** add a tap-to-call or WhatsApp button so customers can reach Carol directly
+  - Options: floating sticky button (bottom-right), or add to footer + hero
+  - Call format: `tel:+1XXXXXXXXXX`
+  - WhatsApp format: `https://wa.me/1XXXXXXXXXX`
+  - Recommendation: floating WhatsApp button — most common for this audience
+- [ ] Replace `123 Main St, Your City` pickup address in `app/order/confirmation/page.tsx` and `app/checkout/page.tsx`
 
-## Priority 4 — Language toggle (English / Spanish)
-- [ ] Options to consider:
-  - **Simple:** duplicate the copy in both languages, toggle with a `useState` + a `ES | EN` button in the navbar
-  - **Scalable:** use `next-intl` library with locale routing (`/en/...`, `/es/...`)
-  - **Recommendation:** start with the simple toggle since the site is small — can migrate to `next-intl` later if needed
-- [ ] Decide which language is the default (likely Spanish for Carol's core audience, English secondary)
+## Priority 5 — Language toggle (English / Spanish)
+- [ ] Simple approach: `useState` toggle in the navbar (`ES | EN`) duplicating copy in both languages
+- [ ] Scalable approach: `next-intl` library with locale routing — migrate later if needed
+- [ ] Default language is already Spanish — English is secondary
 
-## Priority 5 — Contact / reach Carol more easily
-- [ ] Add a WhatsApp link in the footer or hero (most common for this audience) — format: `https://wa.me/1XXXXXXXXXX`
-- [ ] Consider a simple contact section or sticky WhatsApp button (floating bottom-right)
-- [ ] If Carol wants an email form, add a `/api/contact` route using Resend
+## Priority 6 — Bug: order window enforcement
+- Order window is **6am–9pm**. Bug: user can add items to cart before 9pm, then the cutoff passes, and they can still proceed to checkout.
+- Fix: validate cutoff in the checkout API route (`app/api/checkout/route.ts`) and block new PaymentIntents outside the window
+- Also block the "Agregar al pedido" button client-side after 9pm and before 6am
+- Future: accept same-day pickup orders if Carol wants to open that option
 
-## Priority 6 — Better digital assets (food photos)
-- [ ] Options for getting real photos:
-  - **Best:** Carol cooks a batch and photographs with a phone — natural light, close-up shots work great
-  - **Good:** Use a food photographer for a one-time shoot (~$150–300)
-  - **Short-term:** Curated free photos from [Unsplash](https://unsplash.com) or [Pexels](https://pexels.com) — search "arepa", "pan relleno", "Colombian food"
-  - **AI-generated:** Midjourney or DALL·E for placeholder-quality images while waiting for real ones
-- [ ] Replace `image_url: 'test'` in `lib/constants.ts` for `pan_pollo` and `pan_carne` as soon as photos are ready
-- [ ] Recommended image size: at least 800×600px, square or 4:3 ratio works best for the cards
-
-
-## Priority 7 - Bug when choosing what to order
-
-  - order closes after 9pm but you can add items before going to the checkout cart, if something was added then you can keep adding and even move to the checkout page, which is not allowable after 9pm. available between 6am till 8pm. no orders between 8pm and 6am. so we know how much ingredients to buy in order to make the batch at 3-4am for the orders of the day.
-
-  - in the future maybe they can accept orders for pick up.
+## Priority 7 — Go live
+- [ ] Point custom domain to Vercel deployment
+- [ ] Set all env vars in Vercel dashboard (same as `.env.local`)
+- [ ] Enable Stripe webhook in production (separate from test webhook)
+- [ ] Smoke test full order flow on production before sharing with Carol
 
 ---
 
