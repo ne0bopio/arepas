@@ -92,7 +92,7 @@ export async function POST(req: NextRequest) {
     // Send confirmation email via Resend
     try {
       await resend.emails.send({
-        from: 'Arepas y más <orders@arepasymas.com>', // TODO: Replace with real sending domain
+        from: 'Arepas y más <onboarding@resend.dev>', // TODO: Replace with real sending domain once verified
         to: customer.email,
         subject: '¡Tu pedido está confirmado! 🌽',
         html: buildConfirmationEmail(customer, items, totalCents, order.id),
