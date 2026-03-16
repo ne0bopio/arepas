@@ -94,7 +94,7 @@ export async function POST(req: NextRequest) {
       await resend.emails.send({
         from: 'Arepas y más <orders@arepasymas.com>', // TODO: Replace with real sending domain
         to: customer.email,
-        subject: 'Your order is confirmed! 🌽',
+        subject: '¡Tu pedido está confirmado! 🌽',
         html: buildConfirmationEmail(customer, items, totalCents, order.id),
       })
     } catch (emailErr) {
@@ -121,17 +121,17 @@ function buildConfirmationEmail(
 
   return `
     <div style="font-family: Inter, sans-serif; max-width: 600px; margin: 0 auto; color: #1A1A1A;">
-      <h1 style="font-size: 28px; color: #F5A623;">Order confirmed! 🌽</h1>
-      <p>Hi ${customer.name},</p>
-      <p>Your order is locked in. Carlos will cook it fresh for you tomorrow morning.</p>
-      <h2 style="font-size: 18px;">What you ordered</h2>
+      <h1 style="font-size: 28px; color: #F5A623;">¡Pedido confirmado! 🌽</h1>
+      <p>Hola ${customer.name},</p>
+      <p>¡Tu pedido está listo! Yo cocino todo fresco para ti mañana temprano. — Carol</p>
+      <h2 style="font-size: 18px;">Lo que pediste</h2>
       <ul>${itemsList}</ul>
       <p><strong>Total: $${(totalCents / 100).toFixed(2)}</strong></p>
       <hr style="border: none; border-top: 1px solid #eee; margin: 24px 0;" />
-      <p><strong>Pickup location:</strong><br/>123 Main St, Your City</p>
-      <p><strong>Ready from:</strong> 8am – 11am tomorrow</p>
-      <p style="color: #666; font-size: 12px;">Order ID: ${orderId}</p>
-      <p style="color: #666; font-size: 12px;">Made with love by Carlos. ⚽🇨🇴</p>
+      <p><strong>Lugar de recogida:</strong><br/>123 Main St, Your City</p>
+      <p><strong>Listo desde:</strong> 8am – 11am mañana</p>
+      <p style="color: #666; font-size: 12px;">ID del pedido: ${orderId}</p>
+      <p style="color: #666; font-size: 12px;">Hecha con amor by Carol. 🇨🇴</p>
     </div>
   `
 }

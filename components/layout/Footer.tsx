@@ -13,8 +13,8 @@ export default function Footer() {
         </div>
 
         <div className="text-sm text-white/60 text-center md:text-center">
-          <p className="font-semibold text-[#F5A623]">Order by 9pm tonight</p>
-          <p>for tomorrow&apos;s fresh batch</p>
+          <p className="font-semibold text-[#F5C6AA]">Ordena antes de las 9pm</p>
+          <p>para el lote fresco de mañana</p>
         </div>
 
         <div className="flex flex-col gap-2 text-sm">
@@ -33,7 +33,7 @@ export default function Footer() {
       </div>
 
       <div className="max-w-6xl mx-auto mt-8 pt-6 border-t border-white/10 text-xs text-white/30 text-center">
-        © {new Date().getFullYear()} {SITE_NAME}. All rights reserved. Pickup only — no delivery.
+        © {new Date().getFullYear()} {SITE_NAME}. Todos los derechos reservados. Solo recoger — no hacemos entregas.
       </div>
     </footer>
   )

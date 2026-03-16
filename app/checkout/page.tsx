@@ -40,10 +40,10 @@ function CheckoutForm({
         className="w-full"
         disabled={!stripe || !elements || loading || !customer.name || !customer.email}
       >
-        {loading ? 'Processing...' : 'Place order & pay'}
+        {loading ? 'Procesando...' : 'Hacer pedido y pagar'}
       </Button>
       <p className="text-xs text-center text-[#1A1A1A]/40 flex items-center justify-center gap-1">
-        🔒 Secured by Stripe. Your card details are never stored.
+        🔒 Protegido por Stripe. Tus datos de tarjeta nunca se guardan.
       </p>
     </form>
   )
@@ -152,10 +152,10 @@ export default function CheckoutPage() {
           className="text-4xl font-bold text-[#1A1A1A] mb-2"
           style={{ fontFamily: 'var(--font-lora)' }}
         >
-          Checkout
+          Pagar
         </h1>
         <p className="text-[#1A1A1A]/60 mb-10">
-          Order for{' '}
+          Pedido para{' '}
           <span className="font-semibold text-[#1A1A1A]">{getTomorrowLabel()}</span>
         </p>
 
@@ -168,11 +168,11 @@ export default function CheckoutPage() {
                 className="font-bold text-lg text-[#1A1A1A]"
                 style={{ fontFamily: 'var(--font-lora)' }}
               >
-                Your details
+                Tus datos
               </h2>
               <div>
                 <label className="block text-sm font-medium text-[#1A1A1A]/70 mb-1" htmlFor="name">
-                  Full name *
+                  Nombre completo *
                 </label>
                 <input
                   id="name"
@@ -181,7 +181,7 @@ export default function CheckoutPage() {
                   value={customer.name}
                   onChange={(e) => setCustomer((c) => ({ ...c, name: e.target.value }))}
                   className="w-full border border-black/15 rounded-xl px-4 py-3 text-[#1A1A1A] focus:outline-none focus:ring-2 focus:ring-[#F5A623] bg-white"
-                  placeholder="Jane Smith"
+                  placeholder="María García"
                 />
               </div>
               <div>
@@ -195,12 +195,12 @@ export default function CheckoutPage() {
                   value={customer.email}
                   onChange={(e) => setCustomer((c) => ({ ...c, email: e.target.value }))}
                   className="w-full border border-black/15 rounded-xl px-4 py-3 text-[#1A1A1A] focus:outline-none focus:ring-2 focus:ring-[#F5A623] bg-white"
-                  placeholder="jane@example.com"
+                  placeholder="maria@ejemplo.com"
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-[#1A1A1A]/70 mb-1" htmlFor="phone">
-                  Phone (optional)
+                  Teléfono (opcional)
                 </label>
                 <input
                   id="phone"
@@ -215,12 +215,12 @@ export default function CheckoutPage() {
 
             {/* Pickup info */}
             <div className="bg-[#2D6A4F]/5 rounded-2xl p-6 border border-[#2D6A4F]/10">
-              <h2 className="font-bold text-[#2D6A4F] mb-2">Pickup location</h2>
+              <h2 className="font-bold text-[#2D6A4F] mb-2">Lugar de recogida</h2>
               <p className="text-sm text-[#1A1A1A]/70">
-                {/* TODO: Replace with Carlos's real pickup address */}
+                {/* TODO: Replace with Carol's real pickup address */}
                 123 Main St, Your City
                 <br />
-                Pickup available from 8am – 11am on {getTomorrowLabel()}
+                Disponible para recoger de 8am – 11am el {getTomorrowLabel()}
               </p>
             </div>
 
@@ -230,7 +230,7 @@ export default function CheckoutPage() {
                 className="font-bold text-lg text-[#1A1A1A] mb-6"
                 style={{ fontFamily: 'var(--font-lora)' }}
               >
-                Payment
+                Pago
               </h2>
 
               {error && (
@@ -269,7 +269,7 @@ export default function CheckoutPage() {
                 </Elements>
               ) : error ? null : (
                 <div className="flex items-center justify-center py-8 text-[#1A1A1A]/40 text-sm">
-                  <span className="animate-pulse">Loading payment form...</span>
+                  <span className="animate-pulse">Cargando formulario de pago...</span>
                 </div>
               )}
             </div>
@@ -282,7 +282,7 @@ export default function CheckoutPage() {
                 className="font-bold text-lg text-[#1A1A1A] mb-4"
                 style={{ fontFamily: 'var(--font-lora)' }}
               >
-                Order summary
+                Resumen del pedido
               </h2>
               <ul className="space-y-3 mb-4">
                 {items.map((item) => (
@@ -394,10 +394,10 @@ function StripeCheckoutForm({
         className="w-full"
         disabled={!stripe || !elements || loading || !customer.name || !customer.email}
       >
-        {loading ? 'Processing...' : `Pay ${formatCents(totalCents)} & place order`}
+        {loading ? 'Procesando...' : `Pagar ${formatCents(totalCents)} y hacer pedido`}
       </Button>
       <p className="text-xs text-center text-[#1A1A1A]/40 flex items-center justify-center gap-1">
-        🔒 Secured by Stripe. Your card details are never stored.
+        🔒 Protegido por Stripe. Tus datos de tarjeta nunca se guardan.
       </p>
     </form>
   )

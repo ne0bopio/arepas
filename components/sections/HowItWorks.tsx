@@ -8,23 +8,23 @@ const steps = [
   {
     number: '01',
     icon: '🛒',
-    title: 'Browse & order',
+    title: 'Elige y ordena',
     description:
-      'Pick your arepas or stuffed rolls, choose your quantities, and pay securely. Takes less than 2 minutes.',
+      'Escoge tus arepas o pan relleno, elige las cantidades, y paga de forma segura. En menos de 2 minutos.',
   },
   {
     number: '02',
-    icon: '👨‍🍳',
-    title: 'We cook fresh',
+    icon: '👩‍🍳',
+    title: 'Cocino fresco',
     description:
-      'Once orders close at 9pm, Carlos knows exactly what to cook. Every item is made fresh the next morning — nothing sitting out, nothing frozen.',
+      'Cuando cierran los pedidos a las 9pm, sé exactamente qué cocinar. Todo se hace fresco a la mañana siguiente — nada guardado, nada congelado.',
   },
   {
     number: '03',
     icon: '📦',
-    title: 'Pick up tomorrow',
+    title: 'Recoges mañana',
     description:
-      'Swing by and pick up your order. You\'ll get a confirmation email with all the details.',
+      'Pasas a recoger tu pedido. Te llegará un email de confirmación con todos los detalles.',
   },
 ]
 
@@ -42,14 +42,14 @@ export default function HowItWorks() {
           className="text-center mb-16"
         >
           <motion.p variants={fadeUp} className="text-sm font-semibold tracking-widest uppercase text-[#2D6A4F] mb-3">
-            Simple as it gets
+            Así de fácil
           </motion.p>
           <motion.h2
             variants={fadeUp}
             className="text-4xl sm:text-5xl font-bold text-[#1A1A1A]"
             style={{ fontFamily: 'var(--font-lora)' }}
           >
-            How it works
+            Cómo funciona
           </motion.h2>
         </motion.div>
 
@@ -66,13 +66,13 @@ export default function HowItWorks() {
             <motion.div
               key={step.number}
               variants={fadeUp}
-              className="relative flex flex-col items-center text-center p-8 rounded-2xl bg-[#FDFAF4]"
+              className="relative flex flex-col items-center text-center p-8 rounded-3xl bg-[#FDFAF4]"
             >
-              <div className="w-20 h-20 rounded-full bg-[#F5A623]/10 flex items-center justify-center text-3xl mb-6">
+              <div className="w-20 h-20 rounded-full bg-[#F5C6AA]/20 ring-1 ring-[#F5C6AA]/30 flex items-center justify-center text-3xl mb-6">
                 {step.icon}
               </div>
               <span className="text-xs font-bold tracking-widest text-[#F5A623] uppercase mb-2">
-                Step {step.number}
+                Paso {step.number}
               </span>
               <h3 className="text-xl font-bold text-[#1A1A1A] mb-3" style={{ fontFamily: 'var(--font-lora)' }}>
                 {step.title}

@@ -36,7 +36,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           <Link href="/order">
             <Button size="sm">
-              Order Now
+              Ordenar
               {totalItems > 0 && (
                 <span className="ml-2 bg-white/30 rounded-full text-xs w-5 h-5 flex items-center justify-center font-bold">
                   {totalItems}
